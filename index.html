@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a3a2a">
+  <meta name="description" content="Belize's premier Maya ruins and jungle adventure tours. Explore Altun Ha, Lamanai, Cave Tubing and more with Epic Mayan Tours.">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Lightbox2 -->
+  <link rel="stylesheet" href="/assets/lightbox.css">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+
+  <title>Epic Mayan Tours — Ancient Wonders of Belize</title>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       INSTALL BANNER (hidden by default, shown via JS)
+  ════════════════════════════════════════════════════ -->
+  <div id="install-banner" class="install-banner" role="alert" aria-live="polite" hidden>
+    <span class="install-banner__text">
+      📲 Install Epic Mayan Tours for offline access
+    </span>
+    <button id="install-btn" class="install-banner__btn">Install App</button>
+    <button class="install-banner__dismiss" aria-label="Dismiss" onclick="document.getElementById('install-banner').hidden=true">✕</button>
+  </div>
+
+  <!-- UPDATE TOAST (shown when SW detects new version) -->
+  <div id="update-toast" class="update-toast" hidden>
+    ✨ New content available —
+    <button onclick="applyUpdate()">Refresh</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       HEADER
+  ════════════════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+
+      <a href="/" class="site-header__logo" aria-label="Epic Mayan Tours — Home">
+        <img src="/icons/icon-192.png" alt="Epic Mayan Tours logo" width="40" height="40">
+        <span class="site-header__logo-text">Epic Mayan Tours</span>
+      </a>
+
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <a href="#tours"   class="site-nav__link">Tours</a>
+        <a href="#gallery" class="site-nav__link">Gallery</a>
+        <a href="#contact" class="site-nav__link">Contact</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO — Parallax full-screen
+  ════════════════════════════════════════════════════ -->
+  <section class="hero" aria-label="Hero banner">
+    <div class="hero__bg" role="img" aria-label="Maya temple rising through jungle canopy"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Belize · Ancient Wonders</p>
+      <h1 class="hero__title">Explore the<br>Maya World</h1>
+      <p class="hero__subtitle">
+        Private guided tours to Belize's most spectacular<br>
+        Maya ruins, rivers, and underground caves.
+      </p>
+      <div class="hero__cta-group">
+        <a href="#tours"   class="btn btn--gold">View Our Tours</a>
+        <a href="#contact" class="btn btn--outline">Book Now</a>
+      </div>
+    </div>
+    <a href="#tours" class="hero__scroll-hint" aria-label="Scroll down">
+      <span class="hero__scroll-hint-icon"></span>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       TOURS
+  ════════════════════════════════════════════════════ -->
+  <section id="tours" class="tours section" aria-labelledby="tours-heading">
+    <div class="section__inner">
+
+      <header class="section__header">
+        <p class="section__eyebrow">Our Experiences</p>
+        <h2 id="tours-heading" class="section__title">Featured Tours</h2>
+        <div class="section__divider"></div>
+      </header>
+
+      <div class="tour-grid">
+
+        <!-- Tour 1: Altun Ha -->
+        <article class="tour-card fade-in" aria-label="Altun Ha Maya Ruins Tour">
+          <div class="tour-card__img-wrap">
+            <img src="/images/altun-ha.jpg"
+                 alt="Altun Ha Maya pyramid rising above the jungle in Belize"
+                 loading="lazy"
+                 width="480" height="320"
+                 class="tour-card__img">
+          </div>
+          <div class="tour-card__body">
+            <p class="tour-card__tag">Archaeology</p>
+            <h3 class="tour-card__title">Altun Ha Ruins</h3>
+            <p class="tour-card__desc">
+              Discover the iconic Sun God Temple and the famous Jade Head at
+              Belize's most visited Maya site — just 45 minutes from Belize City.
+            </p>
+            <a href="#contact" class="btn btn--gold btn--sm">Book This Tour</a>
+          </div>
+        </article>
+
+        <!-- Tour 2: Lamanai -->
+        <article class="tour-card fade-in" aria-label="Lamanai River Tour">
+          <div class="tour-card__img-wrap">
+            <img src="/images/lamanai.jpg"
+                 alt="Lamanai temple emerging from dense jungle beside the New River Lagoon"
+                 loading="lazy"
+                 width="480" height="320"
+                 class="tour-card__img">
+          </div>
+          <div class="tour-card__body">
+            <p class="tour-card__tag">River Adventure</p>
+            <h3 class="tour-card__title">Lamanai by River</h3>
+            <p class="tour-card__desc">
+              Glide along the New River Lagoon through mangroves and wildlife
+              to reach the towering Mask Temple of ancient Lamanai.
+            </p>
+            <a href="#contact" class="btn btn--gold btn--sm">Book This Tour</a>
+          </div>
+        </article>
+
+        <!-- Tour 3: Cave Tubing -->
+        <article class="tour-card fade-in" aria-label="Cave Tubing Adventure Tour">
+          <div class="tour-card__img-wrap">
+            <img src="/images/cave.jpg"
+                 alt="Glowing underground cave river with tubing adventurers in Belize"
+                 loading="lazy"
+                 width="480" height="320"
+                 class="tour-card__img">
+          </div>
+          <div class="tour-card__body">
+            <p class="tour-card__tag">Adventure</p>
+            <h3 class="tour-card__title">Cave Tubing</h3>
+            <p class="tour-card__desc">
+              Float through sacred Maya underworld caves on a gentle river —
+              an unforgettable journey into Belize's stunning karst landscape.
+            </p>
+            <a href="#contact" class="btn btn--gold btn--sm">Book This Tour</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       GALLERY
+  ════════════════════════════════════════════════════ -->
+  <section id="gallery" class="gallery section section--dark" aria-labelledby="gallery-heading">
+    <div class="section__inner">
+
+      <header class="section__header">
+        <p class="section__eyebrow section__eyebrow--light">Through the Lens</p>
+        <h2 id="gallery-heading" class="section__title section__title--light">Gallery</h2>
+        <div class="section__divider"></div>
+      </header>
+
+      <div class="gallery-grid">
+
+        <a href="/images/altun-ha.jpg"
+           data-lightbox="gallery"
+           data-title="Altun Ha Maya Ruins — Temple of the Sun God"
+           class="gallery-item fade-in">
+          <img src="/images/altun-ha.jpg"
+               alt="Altun Ha Maya Ruins — Temple of the Sun God"
+               loading="lazy" width="400" height="280">
+          <span class="gallery-item__caption">Altun Ha Ruins</span>
+        </a>
+
+        <a href="/images/lamanai.jpg"
+           data-lightbox="gallery"
+           data-title="Lamanai — High Temple rising above the New River Lagoon"
+           class="gallery-item fade-in">
+          <img src="/images/lamanai.jpg"
+               alt="Lamanai High Temple rising above the jungle canopy"
+               loading="lazy" width="400" height="280">
+          <span class="gallery-item__caption">Lamanai Temple</span>
+        </a>
+
+        <a href="/images/snorkeling.jpg"
+           data-lightbox="gallery"
+           data-title="Snorkeling the Belize Barrier Reef"
+           class="gallery-item fade-in">
+          <img src="/images/snorkeling.jpg"
+               alt="Snorkeling above vibrant coral formations in the Belize Barrier Reef"
+               loading="lazy" width="400" height="280">
+          <span class="gallery-item__caption">Barrier Reef</span>
+        </a>
+
+        <a href="/images/cave.jpg"
+           data-lightbox="gallery"
+           data-title="Cave Tubing — the sacred Maya underworld rivers"
+           class="gallery-item fade-in">
+          <img src="/images/cave.jpg"
+               alt="Illuminated cave river with adventurers floating on tubes"
+               loading="lazy" width="400" height="280">
+          <span class="gallery-item__caption">Cave Tubing</span>
+        </a>
+
+        <a href="/images/jungle.jpg"
+           data-lightbox="gallery"
+           data-title="Belize jungle canopy — home to toucans and howler monkeys"
+           class="gallery-item fade-in">
+          <img src="/images/jungle.jpg"
+               alt="Dense Belize jungle canopy seen from above"
+               loading="lazy" width="400" height="280">
+          <span class="gallery-item__caption">Jungle Canopy</span>
+        </a>
+
+        <a href="/images/city.jpg"
+           data-lightbox="gallery"
+           data-title="Belize City — gateway to ancient adventures"
+           class="gallery-item fade-in">
+          <img src="/images/city.jpg"
+               alt="Belize City waterfront at golden hour"
+               loading="lazy" width="400" height="280">
+          <span class="gallery-item__caption">Belize City</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PARALLAX DIVIDER — Sunset
+  ════════════════════════════════════════════════════ -->
+  <div class="parallax-divider" role="img" aria-label="Sunset over Maya ruins">
+    <div class="parallax-divider__overlay"></div>
+    <div class="parallax-divider__content">
+      <blockquote class="parallax-divider__quote">
+        "Every stone tells a thousand years of story."
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       CONTACT / BOOK
+  ════════════════════════════════════════════════════ -->
+  <section id="contact" class="contact section" aria-labelledby="contact-heading">
+    <div class="section__inner section__inner--narrow">
+
+      <header class="section__header">
+        <p class="section__eyebrow">Get in Touch</p>
+        <h2 id="contact-heading" class="section__title">Book Your Adventure</h2>
+        <div class="section__divider"></div>
+      </header>
+
+      <p class="contact__lead">
+        Ready to walk in the footsteps of the ancient Maya?
+        Reach us directly on WhatsApp for instant booking and custom tour packages.
+      </p>
+
+      <div class="contact__actions">
+        <a href="https://wa.me/5016000000"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn btn--gold btn--lg"
+           aria-label="Contact Epic Mayan Tours on WhatsApp">
+          💬 &nbsp;WhatsApp Us
+        </a>
+      </div>
+
+      <!-- QR Code placeholder -->
+      <div class="contact__qr" aria-label="WhatsApp QR Code">
+        <div class="contact__qr-box">
+          <p class="contact__qr-label">Scan to WhatsApp</p>
+          <div class="contact__qr-img" id="qr-placeholder">
+            <!-- Replace with: <img src="/images/qr-whatsapp.png" alt="WhatsApp QR Code"> -->
+            <span class="contact__qr-placeholder-text">QR Code</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact__info">
+        <p>📍 &nbsp;Belize City, Belize</p>
+        <p>🕐 &nbsp;Tours available daily · 6 AM – 6 PM</p>
+        <p>✉️ &nbsp;epicmayantours@gmail.com</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <p class="site-footer__brand">Epic Mayan Tours</p>
+      <p class="site-footer__copy">© 2025 Epic Mayan Tours · Belize · All rights reserved.</p>
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <a href="#tours">Tours</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       SCRIPTS
+  ════════════════════════════════════════════════════ -->
+  <!-- Lightbox2 -->
+  <script src="/assets/lightbox.js"></script>
+
+  <!-- Main app logic (SW registration, install prompt, update toast, animations) -->
+  <script src="/app.js"></script>
+
+</body>
+</html>

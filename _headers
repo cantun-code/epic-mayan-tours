@@ -1,0 +1,63 @@
+# ============================================================
+#  Epic Mayan Tours — _headers
+#  Cloudflare Pages static headers configuration
+#  Docs: https://developers.cloudflare.com/pages/configuration/headers/
+# ============================================================
+
+# ── HTML pages (no cache — always fresh) ────────────────────
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/
+  Cache-Control: no-cache, no-store, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# ── Service Worker (never cache — must always be fresh) ──────
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Service-Worker-Allowed: /
+
+# ── PWA Manifest ─────────────────────────────────────────────
+/manifest.json
+  Cache-Control: public, max-age=86400
+  Content-Type: application/manifest+json
+
+# ── CSS & JS (long cache + immutable) ────────────────────────
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/app.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/lightbox.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/lightbox.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+
+# ── Images (long cache) ───────────────────────────────────────
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── Icons (long cache) ───────────────────────────────────────
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── Global security headers (applied to all routes) ──────────
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src 'self'; frame-ancestors 'none'
