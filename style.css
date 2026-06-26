@@ -379,7 +379,7 @@ a {
 .hero__bg {
   position: absolute;
   inset: 0;
-  background-image: url('/images/hero.jpg');
+  background-image: url('/images/hero.webp');
   background-size: cover;
   background-position: center 30%;
   background-attachment: fixed;
@@ -601,7 +601,7 @@ a {
 .parallax-divider {
   position: relative;
   height: 420px;
-  background-image: url('/images/sunset.jpg');
+  background-image: url('/images/sunset.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
