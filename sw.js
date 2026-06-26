@@ -111,7 +111,7 @@ async function networkFirst(request) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
-  } catch {
+  } catch (err){
     const cached = await caches.match(request);
     if (cached) return cached;
     // For navigation failures, return offline page
@@ -133,7 +133,7 @@ async function staleWhileRevalidate(request) {
       }
       return networkResponse;
     })
-    .catch(() => null);
+    .catch((err) => null);
 
   return cached || await fetchPromise || new Response('Offline', { status: 503 });
 }
@@ -149,7 +149,7 @@ async function cacheFirst(request) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
-  } catch {
+  } catch (err){
     return new Response('Asset unavailable offline', { status: 503 });
   }
 }
