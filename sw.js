@@ -1,14 +1,7 @@
-// ============================================================
-//  Epic Mayan Tours — Service Worker
-//  Strategy:
-//    HTML          → Network First  (always fresh content)
-//    CSS / JS      → Stale While Revalidate
-//    Images/Icons  → Cache First    (long-lived assets)
-//  Auto-update:    skipWaiting + postMessage on new version
-// ============================================================
+'use strict';
 
 const CACHE_VERSION = 'CACHE_V1';
-const OFFLINE_URL   = '/offline.html';
+const OFFLINE_URL = '/offline.html';
 
 const PRECACHE_ASSETS = [
   '/',
@@ -28,25 +21,22 @@ const PRECACHE_ASSETS = [
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/icons/maskable-512.png',
-  // Lightbox2 assets (served locally via /assets/)
   '/assets/lightbox.css',
-  '/assets/lightbox.js'
+  '/assets/lightbox.js',
   '/assets/images/close.png',
   '/assets/images/loading.gif',
   '/assets/images/next.png',
   '/assets/images/prev.png'
 ];
 
-// ─── INSTALL ────────────────────────────────────────────────
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
       .then(cache => cache.addAll(PRECACHE_ASSETS))
-      .then(() => self.skipWaiting())   // activate immediately
+      .then(() => self.skipWaiting())
   );
 });
 
-// ─── ACTIVATE ───────────────────────────────────────────────
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
@@ -54,54 +44,47 @@ self.addEventListener('activate', event => {
         Promise.all(
           keys
             .filter(key => key !== CACHE_VERSION)
-            .map(key => caches.delete(key))   // remove old caches
+            .map(key => caches.delete(key))
         )
       )
       .then(() => {
-        self.clients.claim();                 // take control immediately
+        self.clients.claim();
         notifyClients({ type: 'SW_UPDATED' });
       })
   );
 });
 
-// ─── FETCH ──────────────────────────────────────────────────
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Only handle same-origin GET requests
   if (request.method !== 'GET' || url.origin !== location.origin) return;
 
   const destination = request.destination;
 
-  // ── HTML → Network First ──────────────────────────────────
   if (destination === 'document') {
     event.respondWith(networkFirst(request));
     return;
   }
 
-  // ── CSS / JS → Stale While Revalidate ────────────────────
   if (destination === 'style' || destination === 'script') {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
 
-  // ── Images / Icons / Fonts → Cache First ─────────────────
   if (
     destination === 'image' ||
-    destination === 'font'  ||
+    destination === 'font' ||
     url.pathname.startsWith('/icons/') ||
-    url.pathname.startsWith('/images/')
+    url.pathname.startsWith('/images/') ||
+    url.pathname.startsWith('/assets/images/')
   ) {
     event.respondWith(cacheFirst(request));
     return;
   }
 
-  // ── Everything else → Network with cache fallback ─────────
   event.respondWith(networkFirst(request));
 });
-
-// ─── STRATEGIES ─────────────────────────────────────────────
 
 async function networkFirst(request) {
   try {
@@ -111,10 +94,9 @@ async function networkFirst(request) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
-  } catch (err){
+  } catch (err) {
     const cached = await caches.match(request);
     if (cached) return cached;
-    // For navigation failures, return offline page
     if (request.destination === 'document') {
       return caches.match(OFFLINE_URL);
     }
@@ -123,7 +105,7 @@ async function networkFirst(request) {
 }
 
 async function staleWhileRevalidate(request) {
-  const cache  = await caches.open(CACHE_VERSION);
+  const cache = await caches.open(CACHE_VERSION);
   const cached = await cache.match(request);
 
   const fetchPromise = fetch(request)
@@ -149,20 +131,18 @@ async function cacheFirst(request) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
-  } catch (err){
+  } catch (err) {
     return new Response('Asset unavailable offline', { status: 503 });
   }
 }
 
-// ─── AUTO-UPDATE NOTIFICATION ────────────────────────────────
 function notifyClients(payload) {
   self.clients.matchAll({ includeUncontrolled: true, type: 'window' })
     .then(clients => clients.forEach(client => client.postMessage(payload)));
 }
 
-// ─── MANUAL SKIP WAITING (triggered from app.js) ─────────────
 self.addEventListener('message', event => {
-  if (event.data?.type === 'SKIP_WAITING') {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
