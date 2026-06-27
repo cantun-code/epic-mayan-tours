@@ -35,7 +35,7 @@
     {
       "src": "/images/hero.webp",
       "sizes": "1280x720",
-      "type": "image/jpeg",
+      "type": "image/webp",
       "form_factor": "wide",
       "label": "Epic Mayan Tours — Desktop Hero View"
     }
