@@ -33,7 +33,7 @@
   ],
   "screenshots": [
     {
-      "src": "/images/hero.jpg",
+      "src": "/images/hero.webp",
       "sizes": "1280x720",
       "type": "image/jpeg",
       "form_factor": "wide",
